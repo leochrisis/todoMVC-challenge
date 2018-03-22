@@ -1,5 +1,13 @@
 <template>
   <q-layout view="lHh Lpr lFf">
+    <q-layout-header>
+      <q-toolbar color="primary">
+        <q-toolbar-title>
+          ToDo MVC
+        </q-toolbar-title>
+        <q-btn flat round dense icon="fab fa-github" size="20px"/>
+      </q-toolbar>
+    </q-layout-header>
     <q-page-container>
       <router-view />
     </q-page-container>
