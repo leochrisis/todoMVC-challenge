@@ -35,6 +35,18 @@
             <q-card color="purple-2">
               <q-card-title>
                 {{task.title}}
+                <q-btn round flat icon="more_vert" slot="right">
+                  <q-popover>
+                    <q-list link class="no-border">
+                      <q-item v-close-overlay>
+                        <q-item-main label="Edit task" />
+                      </q-item>
+                      <q-item v-close-overlay>
+                        <q-item-main label="Delete task" />
+                      </q-item>
+                    </q-list>
+                  </q-popover>
+                </q-btn>
               </q-card-title>
               <q-card-separator />
               <q-card-main>
