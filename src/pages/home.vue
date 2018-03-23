@@ -4,7 +4,7 @@
       <div class="row justify-center">
         <div style="width: 500px; max-width: 90vw;">
           <q-input
-            v-model="newTask"
+            v-model="title"
             float-label="Add a new task"
             placeholder="Title"
             v-on:keyup.13="submit"
@@ -38,7 +38,7 @@ export default {
   name: 'Home',
 
   data: () => ({
-    newTask: ''
+    title: '',
     description: '',
     tasks: []
   }),
