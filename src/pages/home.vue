@@ -7,7 +7,7 @@
             v-model="title"
             float-label="Add a new task"
             placeholder="Title"
-            v-on:keyup.13="submit"
+            v-on:keyup.13="AddNewTask"
           />
         </div>
         <div v-if="newTask.length > 0">
@@ -44,8 +44,28 @@ export default {
   }),
 
   methods: {
-    submit () {
-      console.log('Hello')
+    AddNewTask () {
+      if (this.title.length !== 0) {
+        this.tasks.push({
+          title: this.title,
+          description: this.description
+        })
+        this.title = ''
+        this.description = ''
+        this.$q.notify({
+          message: `Sucessfuly added :)`,
+          timeout: 1000,
+          type: 'positive',
+          position: 'top-right'
+        })
+      } else {
+        this.$q.notify({
+          message: `Please, insert a task title`,
+          timeout: 1000,
+          type: 'warning',
+          position: 'top-right'
+        })
+      }
     }
   }
 }
