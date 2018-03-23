@@ -40,10 +40,10 @@
                   <q-popover>
                     <q-list link class="no-border">
                       <q-item v-close-overlay>
-                        <q-item-main label="Edit task" />
+                        <q-item-main label="Edit" />
                       </q-item>
                       <q-item v-close-overlay>
-                        <q-item-main label="Delete task" />
+                        <q-item-main label="Delete" />
                       </q-item>
                     </q-list>
                   </q-popover>
