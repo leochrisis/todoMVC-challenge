@@ -31,7 +31,7 @@
 
       <div class="row justify-center layout-padding">
         <div style="width: 700px; max-width: 90vw;">
-          <div v-for="task in tasks">
+          <div v-for="(task,i) in tasks" :key="i">
             <q-card color="purple-2">
               <q-card-title>
                 <q-checkbox v-model="done" :val="task" @input="doUndoTask(i)"/>
