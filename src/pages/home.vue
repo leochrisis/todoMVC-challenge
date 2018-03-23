@@ -9,9 +9,25 @@
             placeholder="Title"
             v-on:keyup.13="AddNewTask"
           />
+          <div v-if="title.length > 0">
+            <br>
+            <q-slide-transition>
+              <q-input
+                v-model="description"
+                float-label= "Task description (optional)"
+                placeholder="Title"
+                v-on:keyup.13="AddNewTask"
+              />
+            </q-slide-transition>
+            <br>
+            <div class="row justify-end">
+              <q-slide-transition>
+                <q-btn round color="primary" icon="create" size="15px" @click="AddNewTask"/>
+              </q-slide-transition>
+            </div>
+          </div>
         </div>
-        <div v-if="newTask.length > 0">
-          <q-btn round color="primary" icon="create" size="15px"/>
+      </div>
 
       <div class="row justify-center layout-padding">
         <div style="width: 700px; max-width: 90vw;">
