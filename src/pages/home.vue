@@ -34,7 +34,8 @@
           <div v-for="task in tasks">
             <q-card color="purple-2">
               <q-card-title>
-                {{task.title}}
+                <q-checkbox v-model="done" :val="task" @input="doUndoTask(i)"/>
+                  <span :class="{undeline: task.done}">{{task.title}}</span>
                 <q-btn round flat icon="more_vert" slot="right">
                   <q-popover>
                     <q-list link class="no-border">
@@ -68,7 +69,8 @@ export default {
   data: () => ({
     title: '',
     description: '',
-    tasks: []
+    tasks: [],
+    done: []
   }),
 
   methods: {
@@ -76,7 +78,8 @@ export default {
       if (this.title.length !== 0) {
         this.tasks.push({
           title: this.title,
-          description: this.description
+          description: this.description,
+          done: false
         })
         this.title = ''
         this.description = ''
@@ -94,7 +97,20 @@ export default {
           position: 'top-right'
         })
       }
+    },
+
+    doUndoTask (index) {
+      if (this.tasks[index].done) {
+        this.tasks[index].done = false
+      } else {
+        this.tasks[index].done = true
+      }
     }
   }
 }
 </script>
+
+<style lang="sass">
+.undeline
+  text-decoration: line-through
+</style>
