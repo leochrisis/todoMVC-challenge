@@ -49,9 +49,9 @@
                   </q-popover>
                 </q-btn>
               </q-card-title>
-              <q-card-separator />
-              <q-card-main>
-                {{task.description}}
+              <q-card-separator v-if="task.description.length > 0" />
+              <q-card-main v-if="task.description.length > 0">
+                <span :class="{undeline: task.done}"> {{task.description}} </span>
               </q-card-main>
             </q-card>
             <br>
