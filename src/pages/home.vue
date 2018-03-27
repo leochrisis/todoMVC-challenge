@@ -14,8 +14,8 @@
             <q-slide-transition>
               <q-input
                 v-model="description"
-                float-label= "Task description (optional)"
-                placeholder="Title"
+                float-label= "Add description"
+                placeholder="Task description (optional)"
                 v-on:keyup.13="AddNewTask"
               />
             </q-slide-transition>
@@ -34,24 +34,50 @@
           <div v-for="(task,i) in tasks" :key="i">
             <q-card color="purple-2">
               <q-card-title>
-                <q-checkbox v-model="done" :val="task" @input="doUndoTask(i)"/>
+                <div v-if="editedIndex ===  i">
+                  <q-input
+                    v-model="task.title"
+                    placeholder="Title"
+                    v-on:keyup.13="updateTask"
+                  />
+                </div>
+                <div v-else>
+                  <q-checkbox v-model="done" :val="task" @input="doUndoTask(i)"/>
                   <span :class="{undeline: task.done}">{{task.title}}</span>
+                </div>
                 <q-btn round flat icon="more_vert" slot="right">
                   <q-popover>
-                    <q-list link class="no-border">
-                      <q-item v-close-overlay>
-                        <q-item-main label="Edit" />
+                    <q-list link class="no-border" v-if="editedIndex !== i">
+                      <q-item v-close-overlay >
+                        <q-item-main label="Edit" @click.native="openEditionArea(i)"/>
                       </q-item>
                       <q-item v-close-overlay>
                         <q-item-main label="Delete" />
+                      </q-item>
+                    </q-list>
+                    <q-list link class="no-border" v-if="editedIndex === i">
+                      <q-item v-close-overlay >
+                        <q-item-main label="Finish" @click.native="updateTask(i)" />
+                      </q-item>
+                      <q-item v-close-overlay>
+                        <q-item-main label="Cancel" @click.native="editedIndex = false"/>
                       </q-item>
                     </q-list>
                   </q-popover>
                 </q-btn>
               </q-card-title>
               <q-card-separator v-if="task.description.length > 0" />
-              <q-card-main v-if="task.description.length > 0">
-                <span :class="{undeline: task.done}"> {{task.description}} </span>
+              <q-card-main>
+                <div v-if="editedIndex === i">
+                  <q-input
+                    v-model="task.description"
+                    placeholder="Task description (optional)"
+                    v-on:keyup.13="updateTask"
+                  />
+                </div>
+                <div v-else>
+                  <span :class="{undeline: task.done}"> {{task.description}} </span>
+                </div>
               </q-card-main>
             </q-card>
             <br>
@@ -70,7 +96,8 @@ export default {
     title: '',
     description: '',
     tasks: [],
-    done: []
+    done: [],
+    editedIndex: false
   }),
 
   methods: {
@@ -105,6 +132,20 @@ export default {
       } else {
         this.tasks[index].done = true
       }
+    },
+
+    openEditionArea (index) {
+      this.editedIndex = index
+    },
+
+    updateTask () {
+      this.editedIndex = false
+      this.$q.notify({
+        message: `Sucessfuly edited :)`,
+        timeout: 1000,
+        type: 'positive',
+        position: 'top-right'
+      })
     }
   }
 }
