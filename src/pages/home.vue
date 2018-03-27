@@ -52,7 +52,7 @@
                         <q-item-main label="Edit" @click.native="openEditionArea(i)"/>
                       </q-item>
                       <q-item v-close-overlay>
-                        <q-item-main label="Delete" />
+                        <q-item-main label="Delete" @click.native="deleteTask(i)" />
                       </q-item>
                     </q-list>
                     <q-list link class="no-border" v-if="editedIndex === i">
@@ -146,6 +146,10 @@ export default {
         type: 'positive',
         position: 'top-right'
       })
+    },
+
+    deleteTask (index) {
+      this.tasks.splice(index, 1)
     }
   }
 }
